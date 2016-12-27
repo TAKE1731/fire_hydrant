@@ -15,13 +15,14 @@
 	var myPos;
         var myLat;
         var myLng;
-	var myRng;
+	    var myRng;
 
 	function initMap() {
-          myLat = 34.89531;
+      myLat = 34.89531;
 	  myLng = 135.2122;
 	  myRng = 2;
-	  //setGeoLocation();
+	  
+	  setGeoLocation();
 
 	  map = new google.maps.Map(document.getElementById('map'), {
 	    //center: {lat: 34.890265, lng: 135.225443},
