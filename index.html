@@ -16,35 +16,15 @@
     var myLat;
     var myLng;
     var myRng;
+    
 
 	function initMap() {
       myLat = 34.89531;
 	  myLng = 135.2122;
 	  myRng = 2;
 	  
-	  //setGeoLocation();
+	  setGeoLocation();
 	  
-	 if (navigator.geolocation) {
-	       navigator.geolocation.getCurrentPosition(
-				function(pos) {
-				    	myLat = pos.coords.latitude;
-				    	myLng = pos.coords.longitude;
-			       },
-				function(err) {
-					    myLat = 34.89531;
-					    myLng = 135.2122;
-			          },
-				  {
-					enableHighAccuracy: true,
-					timeout: 10000, // タイムアウト10秒
-					maximumAge: 0 // nmsec前のデータを使う、0でキャッシュしない
-				   }
-			);
-		} else {
-			    myLat = 34.89531;
-			    myLng = 135.2122;
-	   }
-
 	  map = new google.maps.Map(document.getElementById('map'), {
 	    //center: {lat: 34.890265, lng: 135.225443},
 	    center: {lat: myLat, lng: myLng},
@@ -53,6 +33,8 @@
 
 
 	  drawPosition();
+	  
+	  map.panTo(new google.maps.LatLng(35.308401,136.131592));
 	}
 
 	var setGeoLocation = function(){
