@@ -36,7 +36,7 @@
 
 	function setGeoLocation(){
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
+			navigator.geolocation.watchPosition(successCallback,errorCallback);
 		} else {
 			    myLat = 34.89531;
 			    myLng = 135.2122;
