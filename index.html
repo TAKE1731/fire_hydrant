@@ -34,25 +34,30 @@
 	  drawPosition();
 	}
 
-	function setGeoLocation(){
-		if (navigator.geolocation) {
-			navigator.geolocation.watchPosition(successCallback,errorCallback);
+	var setGeoLocation = function(){
+	 if (navigator.geolocation) {
+	       navigator.geolocation.watchPosition(
+		function(pos) {
+
+		setGeoMarker(pos.coords.accuracy,pos.coords.latitude,pos.coords.longitude);
+		    	myLat = pos.coords.latitude;
+		    	myLng = pos.coords.longitude;
+	       },
+		function(err) {
+			    myLat = 34.89531;
+			    myLng = 135.2122;
+	          },
+		  {
+			enableHighAccuracy: true,
+			timeout: 10000, // タイムアウト10秒
+			maximumAge: 0 // nmsec前のデータを使う、0でキャッシュしない
+		   }
+		);
 		} else {
 			    myLat = 34.89531;
 			    myLng = 135.2122;
-		}
-	}
-
-	function successCallback(pos) {
-		myLat = pos.coords.latitude;
-		myLng = pos.coords.longitude;
-	}
-
-	function errorCallback(error) {
-		myLat = 34.89531;
-		myLng = 135.2122;
-	}
-
+	   }
+	};
 /*
 	function setGeoLocation(){
 		if (navigator.geolocation) {
