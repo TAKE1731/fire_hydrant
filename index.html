@@ -38,7 +38,7 @@
 
 	var setGeoLocation = function(){
 	 if (navigator.geolocation) {
-	       navigator.geolocation.watchPosition(
+	       navigator.geolocation.getCurrentPosition(
 		function(pos) {
 		    	myLat = pos.coords.latitude;
 		    	myLng = pos.coords.longitude;
