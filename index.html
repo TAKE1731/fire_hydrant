@@ -36,6 +36,26 @@
 
 	function setGeoLocation(){
 		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
+		} else {
+			    myLat = 34.89531;
+			    myLng = 135.2122;
+		}
+	}
+
+	function successCallback(pos) {
+		myLat = pos.coords.latitude;
+		myLng = pos.coords.longitude;
+	}
+
+	function errorCallback(error) {
+		myLat = 34.89531;
+		myLng = 135.2122;
+	}
+
+/*
+	function setGeoLocation(){
+		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(pos) {
 		    	myLat = pos.coords.latitude;
 		    	myLng = pos.coords.longitude;
@@ -49,6 +69,7 @@
 		    myLng = 135.2122;
         }
 	}
+*/
 
 	function drawPosition(){
 	    var req = new XMLHttpRequest();
