@@ -38,8 +38,6 @@
 	 if (navigator.geolocation) {
 	       navigator.geolocation.watchPosition(
 		function(pos) {
-
-		setGeoMarker(pos.coords.accuracy,pos.coords.latitude,pos.coords.longitude);
 		    	myLat = pos.coords.latitude;
 		    	myLng = pos.coords.longitude;
 	       },
