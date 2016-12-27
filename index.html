@@ -36,12 +36,19 @@
 
 	function setGeoLocation(){
 		if (navigator.geolocation) {
-		    myLat = pos.coords.latitude;
-		    myLng = pos.coords.longitude;
+			navigator.geolocation.getCurrentPosition(function(position) {
+		    	myLat = pos.coords.latitude;
+		    	myLng = pos.coords.longitude;
+				   });
+		    }, function() {
+			    myLat = 34.89531;
+			    myLng = 135.2122;
+		    });
+		    
 		} else {
 		    myLat = 34.89531;
 		    myLng = 135.2122;
-                }
+        }
 	}
 
 	function drawPosition(){
