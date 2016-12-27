@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/ >
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+    <title>三田(SANDA)市消火栓マップ</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script type="text/javascript">
+	var map;
+	var myPos;
+        var myLat;
+        var myLng;
+	var myRng;
+
+	function initMap() {
+          myLat = 34.89531;
+	  myLng = 135.2122;
+	  myRng = 2;
+	  //setGeoLocation();
+
+	  map = new google.maps.Map(document.getElementById('map'), {
+	    //center: {lat: 34.890265, lng: 135.225443},
+	    center: {lat: myLat, lng: myLng},
+	    zoom: 16
+	  });
+
+
+	  drawPosition();
+	}
+
+	function setGeoLocation(){
+		if (navigator.geolocation) {
+		    myLat = pos.coords.latitude;
+		    myLng = pos.coords.longitude;
+		} else {
+		    myLat = 34.89531;
+		    myLng = 135.2122;
+                }
+	}
+
+	function drawPosition(){
+	    var req = new XMLHttpRequest();
+	    req.open("get", "data/suiri.txt", true);
+	    req.send(null);
+		
+	    req.onload = function(){
+	         setMark(req.responseText);
+	    }
+	}
+
+	function setMark(str){
+	    var result = [];
+	    var tmp = str.split("\n");
+	 
+	    for(var i=0;i<tmp.length;++i){
+	        result[i] = tmp[i].split(',');
+	    }
+
+	    for(var i=0;i<tmp.length;++i){
+	      drawSymbol(Number(result[i][5]), Number(result[i][6]), result[i][2] + '\n' + result[i][0] + '\nX:' + result[i][3] + '\nY:' + result[i][4]);
+	      drawCircle(Number(result[i][5]), Number(result[i][6]), Number(result[i][7]));
+	    }
+	    
+	     //alert(result[0][4]); 
+	     //alert(Number(result[0][4])); 
+	     //alert(result[0][6]); 
+	    
+	}
+
+	function drawSymbol(lat, lng, ttl) {
+		var marker = new google.maps.Marker({
+		    position: {lat: lat, lng: lng},
+		    icon: {
+		      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+		      scale: 2
+		    },
+		    title: ttl,
+		    draggable: false,
+		    map: map
+		  });
+		  //markerInfo(marker, 'aaa');
+	}
+
+	function markerInfo(marker, name) {
+	    google.maps.event.addListener(marker, 'mouseover', function (event) {
+	        new google.maps.InfoWindow({
+	            content: name
+	        }).open(marker.getMap(), marker);
+	    });
+	    google.maps.event.addListener(marker, 'mouseout', function (event) {
+	        InfoWindow().close();
+	    });
+	}
+	 
+
+        function drawCircle(lat, lng, rad) {
+		var cityCircle = new google.maps.Circle({
+		      strokeColor: '#aa0000',
+		      strokeOpacity: 0.5,
+		      strokeWeight: 1,
+		      fillColor: '#ff9999',
+		      fillOpacity: 0.45,
+		      map: map,
+		      center: {lat: lat, lng: lng},
+		      radius: rad * 1
+		    });
+	}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2fGj-6qjh8Q671Z1zW4_aB4cGJIvZel4&callback=initMap">
+    </script>
+  </body>
+</html>
+
