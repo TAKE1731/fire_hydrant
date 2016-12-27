@@ -38,7 +38,9 @@
 	 if (navigator.geolocation) {
 	       navigator.geolocation.watchPosition(
 		function(pos) {
-		    	myLat = pos.coords.latitude;
+		    	//myLat = pos.coords.latitude;
+		    	//myLng = pos.coords.longitude;
+		    	myLat = pos.coords.accuracy,pos.coords.latitude;
 		    	myLng = pos.coords.longitude;
 	       },
 		function(err) {
