@@ -45,6 +45,7 @@
 		function(pos) {
 		    	myLat = pos.coords.latitude;
 		    	myLng = pos.coords.longitude;
+		    	map.panTo(new google.maps.LatLng(myLat, myLng));
 	       },
 		function(err) {
 			    myLat = 34.89531;
