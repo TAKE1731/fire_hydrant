@@ -20,6 +20,7 @@
     
 	window.onload = function() {
 	  setGeoLocation();
+	  circle.setMap(null);
 	}
 
 	function initMap() {
@@ -129,7 +130,7 @@
 	}
 	 
 
-        function drawCircle(lat, lng, rad) {
+    function drawCircle(lat, lng, rad) {
 		var cityCircle = new google.maps.Circle({
 		      strokeColor: '#aa0000',
 		      strokeOpacity: 0.5,
