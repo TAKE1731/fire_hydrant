@@ -18,13 +18,16 @@
     var myLng;
     var myRng;
     
+	window.onload = function() {
+	  setGeoLocation();
+	  map.panTo(new google.maps.LatLng(myLat, myLng));
+	}
 
 	function initMap() {
       myLat = 34.89531;
 	  myLng = 135.2122;
 	  myRng = 2;
 	  
-	  setGeoLocation();
 	  
 	  map = new google.maps.Map(document.getElementById('map'), {
 	    //center: {lat: 34.890265, lng: 135.225443},
@@ -32,7 +35,6 @@
 	    zoom: 16
 	  });
 
-	  map.panTo(new google.maps.LatLng(myLat, myLng));
 	  drawPosition();
 	  
 	}
